@@ -1,34 +1,47 @@
 using CarRentalMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
-namespace CarRentalMVC.Controllers
+namespace CarRentalMVC.Controllers;
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    ApplicationContext db;
+    private readonly ILogger<HomeController> _logger;
+
+    public HomeController(ILogger<HomeController> logger, ApplicationContext context)
     {
-        private readonly ILogger<HomeController> _logger;
+        _logger = logger;
 
-        public HomeController(ILogger<HomeController> logger) => _logger = logger;
+        db = context;
+    }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+    public  IActionResult Index()
+    {
+        return View();
+    }
 
-        public IActionResult Reservation()
-        {
-            return View();
-        }
+    public IActionResult PrivateOffice()
+    {
+        return View();
+    }
 
-        public IActionResult PrivateOffice()
-        {
-            return View();
-        }
+    [HttpPost]
+    public async Task<IActionResult> PrivateOffice(User user)
+    {
+        db.Users.Add(user);
+        await db.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    public IActionResult Reservation()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
