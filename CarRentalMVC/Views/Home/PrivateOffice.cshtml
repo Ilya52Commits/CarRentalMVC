@@ -1,20 +1,24 @@
 ﻿@model CarRentalMVC.Models.User
 
-<div class="input-group mb-3">
-    <button id="switch-sign-in" class="btn btn-outline-secondary" type="button">Войти</button>
-    <button id="switch-sign-up" class="btn btn-outline-secondary" type="button">Регистрация</button>
+<div class="btn-group mb-3">
+    <button id="switch-sign-in" class="btn-switch btn btn-primary" type="button">Войти</button>
+    <button id="switch-sign-up" class="btn-switch btn btn-primary" type="button">Регистрация</button>
 </div>
 
 <div id="sign-in">
     <h2>Войти</h2>
-    <form class="col-4">
+    <form asp-action="PrivateOffice" asp-controller="home" class="col-4">
         <div class="mb-4">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" />
+            <label asp-for="Name" class="form-label">Имя</label>
+            <input type="text" asp-for="Name" class="form-control" />
         </div>
         <div class="mb-4">
-            <label class="form-label">Пароль</label>
-            <input type="password" class="form-control" />
+            <label asp-for="LastName" class="form-label">Фамилия</label>
+            <input type="text" asp-for="LastName" class="form-control" />
+        </div>
+        <div class="mb-4">
+            <label class="form-label" asp-for="Passwort">Пароль</label>
+            <input type="password" asp-for="Passwort" class="form-control" />
         </div>
         <button type="submit" class="btn btn-primary">Войти</button>
     </form>
@@ -23,35 +27,41 @@
 
 <div id="sign-up">
     <h2>Регистрация</h2>
-    <form asp-action="PrivateOffice" asp-controller="home">
+    <form asp-action="PrivateOffice" asp-controller="home" class="col-4">
         <div class="mb-4">
             <label class="form-label" asp-for="Name">Имя</label><br/>
-            <input type="text" asp-for="Name" />
+            <input type="text" asp-for="Name" class="form-control" />
         </div>
         <div class="mb-4">
             <label class="form-label" asp-for="LastName">Фамилия</label><br />
-            <input type="text" asp-for="LastName" />
+            <input type="text" asp-for="LastName" class="form-control" />
         </div>
         <div class="mb-4">
             <label class="form-label" asp-for="Patronymic">Отчество</label><br />
-            <input type="text" asp-for="Patronymic" />
+            <input type="text" asp-for="Patronymic" class="form-control" />
         </div>
         <div class="mb-4">
             <label class="form-label" asp-for="Passwort">Пароль</label><br />
-            <input type="password" asp-for="Passwort" />
+            <input type="password" asp-for="Passwort" class="form-control" />
         </div>
         <div class="mb-4">
             <label class="form-label" asp-for="Pasport">Паспорт</label><br />
-            <input type="password" asp-for="Pasport" />
+            <input type="password" asp-for="Pasport" class="form-control" />
         </div>
         <div class="mb-4">
             <label class="form-label" asp-for="Phone">Телефон</label><br />
-            <input type="tel" asp-for="Phone" />
+            <input type="tel" asp-for="Phone" class="form-control" />
         </div>
         <div class="mb-4">
             <label class="form-label" asp-for="DateOfBirth">Дата рождения</label><br />
-            <input type="date" asp-for="DateOfBirth" />
+            <input type="date" asp-for="DateOfBirth" class="form-control" />
         </div>
-        <input type="submit" value="Отправить" />
+        <div class="mb-4">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                Разрешение обработку персональных данных
+            </label>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Зарегистрироваться" />
     </form>
 </div>

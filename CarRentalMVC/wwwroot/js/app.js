@@ -14,13 +14,11 @@ if (!window["switchSignUp"]) {
     var switchSignUp = document.querySelector("#switch-sign-up");
     window["switchSignUp"] = switchSignUp;
 }
-
-window["switchSignIn"].addEventListener("click", () => {
+window["switchSignIn"].addEventListener("click", function () {
     window["signIn"].style.display = "block";
     window["signUp"].style.display = "none";
 });
-
-window["switchSignUp"].addEventListener("click", () => {
+window["switchSignUp"].addEventListener("click", function () {
     window["signIn"].style.display = "none";
     window["signUp"].style.display = "block";
 });
