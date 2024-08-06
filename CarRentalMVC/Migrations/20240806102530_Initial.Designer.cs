@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CarRentalMVC.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240805161332_Initial")]
+    [Migration("20240806102530_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

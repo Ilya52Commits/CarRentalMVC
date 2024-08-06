@@ -20,10 +20,10 @@ namespace CarRentalMVC.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     LastName = table.Column<string>(type: "text", nullable: true),
                     Patronymic = table.Column<string>(type: "text", nullable: true),
+                    Passwort = table.Column<string>(type: "text", nullable: true),
                     Pasport = table.Column<string>(type: "text", nullable: true),
                     Phone = table.Column<string>(type: "text", nullable: true),
-                    DateOfBirth = table.Column<string>(type: "text", nullable: true),
-                    Passwort = table.Column<string>(type: "text", nullable: true)
+                    DateOfBirth = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
