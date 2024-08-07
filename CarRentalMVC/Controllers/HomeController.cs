@@ -1,19 +1,18 @@
 using CarRentalMVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace CarRentalMVC.Controllers;
 public class HomeController : Controller
 {
-    ApplicationContext db;
+    private readonly ApplicationContext _dbContext;
     private readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger, ApplicationContext context)
     {
         _logger = logger;
 
-        db = context;
+        _dbContext = context;
     }
 
     public  IActionResult Index()
@@ -29,8 +28,8 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> PrivateOffice(User user)
     {
-        db.Users.Add(user);
-        await db.SaveChangesAsync();
+        _dbContext.Users.Add(user);
+        await _dbContext.SaveChangesAsync();
         return RedirectToAction("Index");
     }
 
