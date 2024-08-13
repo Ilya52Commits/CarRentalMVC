@@ -1,27 +1,25 @@
-﻿if (!window["signIn"]) {
-    const signIn = document.querySelector("#sign-in") as HTMLAnchorElement;
-    window["signIn"] = signIn;
-}
-if (!window["signUp"]) {
-    const signUp = document.querySelector("#sign-up") as HTMLAnchorElement;
-    window["signUp"] = signUp;
-}
-if (!window["switchSignIn"]) {
-    const switchSignIn = document.querySelector("#switch-sign-in") as HTMLAnchorElement;
-    window["switchSignIn"] = switchSignIn;
-}
-if (!window["switchSignUp"]) {
-    const switchSignUp = document.querySelector("#switch-sign-up") as HTMLAnchorElement;
-    window["switchSignUp"] = switchSignUp;
+﻿const signIn = document.querySelector("#sign-in") as HTMLAnchorElement;
+const signUp = document.querySelector("#sign-up") as HTMLAnchorElement;
+const switchSignIn = document.querySelector("#switch-sign-in") as HTMLAnchorElement;
+const switchSignUp = document.querySelector("#switch-sign-up") as HTMLAnchorElement;
+
+let user = {
+    id: "",
+    Name: "",
+    LastName: "",
+    Patronymic: "",
+    Passwort: "",
+    Pasport: "",
+    Phone: "",
+    DateOfBirth: ""
 }
 
+switchSignIn.addEventListener("click", () => {
+    signIn.style.display = "block";
+    signUp.style.display = "none";
+})
 
-(window["switchSignIn"] as HTMLAnchorElement).addEventListener("click", () => {
-    (window["signIn"] as HTMLAnchorElement).style.display = "block";
-    (window["signUp"] as HTMLAnchorElement).style.display = "none";
-});
-
-(window["switchSignUp"] as HTMLAnchorElement).addEventListener("click", () => {
-    (window["signIn"] as HTMLAnchorElement).style.display = "none";
-    (window["signUp"] as HTMLAnchorElement).style.display = "block";
-});
+switchSignUp.addEventListener("click", () => {
+    signIn.style.display = "none";
+    signUp.style.display = "block";
+})

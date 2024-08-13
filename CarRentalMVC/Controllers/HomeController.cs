@@ -1,4 +1,5 @@
 using CarRentalMVC.Models;
+using CarRentalMVC.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +8,13 @@ public class HomeController : Controller
 {
     private readonly ApplicationContext _dbContext;
     private readonly ILogger<HomeController> _logger;
+    private readonly IMessageSender _message; 
 
-    public HomeController(ILogger<HomeController> logger, ApplicationContext context)
+    public HomeController(ILogger<HomeController> logger, IMessageSender message, ApplicationContext context)
     {
         _logger = logger;
+
+        _message = message; 
 
         _dbContext = context;
     }
@@ -26,11 +30,12 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> PrivateOffice(User user)
+    public JsonResult PrivateOffice(User user)
     {
-        _dbContext.Users.Add(user);
-        await _dbContext.SaveChangesAsync();
-        return RedirectToAction("Index");
+        return Json(_message.Send());
+        //_dbContext.Users.Add(user);
+        //await _dbContext.SaveChangesAsync();
+        //return RedirectToAction("Index");
     }
 
     public IActionResult Reservation()
