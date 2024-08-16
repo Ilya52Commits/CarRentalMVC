@@ -1,4 +1,5 @@
 using CarRentalMVC.Models;
+using CarRentalMVC.Repository;
 using CarRentalMVC.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -6,17 +7,17 @@ using System.Diagnostics;
 namespace CarRentalMVC.Controllers;
 public class HomeController : Controller
 {
-    private readonly ApplicationContext _dbContext;
+    IRepository<User> db; 
     private readonly ILogger<HomeController> _logger;
     private readonly IMessageSender _message; 
 
-    public HomeController(ILogger<HomeController> logger, IMessageSender message, ApplicationContext context)
+    public HomeController(ILogger<HomeController> logger, IMessageSender message)
     {
         _logger = logger;
 
         _message = message; 
 
-        _dbContext = context;
+        db = new SQLUserRepository();
     }
 
     public  IActionResult Index()
