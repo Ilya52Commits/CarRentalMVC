@@ -3,10 +3,13 @@
 public interface IRepository<T> : IDisposable
         where T : class
 {
-    IEnumerable<T> GetUserList(); // получение всех объектов
-    T GetUser(int id); // получение одного объекта по id
-    void Create(T item); // создание объекта
-    void Update(T item); // обновление объекта
-    void Delete(int id); // удаление объекта по id
-    void Save();  // сохранение изменений
+    IEnumerable<T> GetUserList();   // получение всех объектов
+    T GetUser(T item);              // получение одного объекта по id
+    void Create(T item);            // создание объекта
+    void Update(T item);            // обновление объекта
+    void Delete(T item);            // удаление объекта по id
+    void Save();                    // сохранение изменений
 }
+/*
+ 1. Создать адстрактный класс с данным функционалом; 
+ */

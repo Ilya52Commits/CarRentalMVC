@@ -10,6 +10,6 @@ public class ApplicationContext : DbContext
         : base(options) 
     { }
     
-    public DbSet<User> Users { get; set; }  // Объект таблицы пользователей
+    public DbSet<UserModel> Users { get; set; }  // Объект таблицы пользователей
 }
 
