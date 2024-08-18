@@ -6,8 +6,9 @@ namespace CarRentalMVC;
 public class ApplicationContext : DbContext
 {      
     /* Строка подключения к базе данных PostgresSQL */
-    public ApplicationContext() 
-        : base() => Database.EnsureCreated();
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) 
+        : base(options) 
+    { }
     
     public DbSet<User> Users { get; set; }  // Объект таблицы пользователей
 }

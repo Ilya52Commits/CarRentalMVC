@@ -1,14 +1,12 @@
-﻿using CarRentalMVC.Models;
+﻿namespace CarRentalMVC.Repository;
 
-namespace CarRentalMVC.Repository;
-
-public interface IRepository<T> where T : class
+public interface IRepository<T> : IDisposable
+        where T : class
 {
-    Task<List<T>> GetAll();
-    Task<T> GetById<TId>(TId id);
-    void Add(T entity);
-    void Update(T entity);
-    void Delete(T entity);
-    Task<int> SaveChanges();
+    IEnumerable<T> GetUserList(); // получение всех объектов
+    T GetUser(int id); // получение одного объекта по id
+    void Create(T item); // создание объекта
+    void Update(T item); // обновление объекта
+    void Delete(int id); // удаление объекта по id
+    void Save();  // сохранение изменений
 }
-

@@ -7,17 +7,17 @@ using System.Diagnostics;
 namespace CarRentalMVC.Controllers;
 public class HomeController : Controller
 {
-    IRepository<User> db; 
+    IRepository<User> _dbContext; 
     private readonly ILogger<HomeController> _logger;
     private readonly IMessageSender _message; 
 
-    public HomeController(ILogger<HomeController> logger, IMessageSender message)
+    public HomeController(ILogger<HomeController> logger, IMessageSender message, IRepository<User> userRepository)
     {
         _logger = logger;
 
         _message = message; 
 
-        db = new SQLUserRepository();
+        _dbContext = userRepository;
     }
 
     public  IActionResult Index()
@@ -31,12 +31,12 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public JsonResult PrivateOffice(User user)
+    public IActionResult PrivateOffice(User user)
     {
-        return Json(_message.Send());
-        //_dbContext.Users.Add(user);
-        //await _dbContext.SaveChangesAsync();
-        //return RedirectToAction("Index");
+        //return Json(_message.Send());
+        _dbContext.Create(user);
+        _dbContext.Save();
+        return RedirectToAction("Index");
     }
 
     public IActionResult Reservation()

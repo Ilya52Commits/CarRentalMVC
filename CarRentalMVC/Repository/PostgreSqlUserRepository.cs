@@ -3,45 +3,45 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarRentalMVC.Repository;
 
-public class SQLUserRepository : IRepository<User>
+public class PostgreSqlUserRepository : IRepository<User>
 {
-    private ApplicationContext _dbContent;
+    private readonly ApplicationContext _dbContext;
 
-    public SQLUserRepository(ApplicationContext context)
+    public PostgreSqlUserRepository(ApplicationContext context)
     {
-        _dbContent = context;
+        _dbContext = context;
     }
 
     public IEnumerable<User> GetUserList()
     {
-        return _dbContent.Users;
+        return _dbContext.Users;
     }
 
     public User GetUser(int id)
     {
-        return _dbContent.Users.Find(id);
+        return _dbContext.Users.Find(id);
     }
 
     public void Create(User User)
     {
-        _dbContent.Users.Add(User);
+        _dbContext.Users.Add(User);
     }
 
     public void Update(User User)
     {
-        _dbContent.Entry(User).State = EntityState.Modified;
+        _dbContext.Entry(User).State = EntityState.Modified;
     }
 
     public void Delete(int id)
     {
-        User User = _dbContent.Users.Find(id);
+        User User = _dbContext.Users.Find(id);
         if (User != null)
-            _dbContent.Users.Remove(User);
+            _dbContext.Users.Remove(User);
     }
 
     public void Save()
     {
-        _dbContent.SaveChanges();
+        _dbContext.SaveChanges();
     }
 
     private bool disposed = false;
@@ -52,7 +52,7 @@ public class SQLUserRepository : IRepository<User>
         {
             if (disposing)
             {
-                _dbContent.Dispose();
+                _dbContext.Dispose();
             }
         }
         this.disposed = true;
@@ -63,4 +63,5 @@ public class SQLUserRepository : IRepository<User>
         Dispose(true);
         GC.SuppressFinalize(this);
     }
-}   
+}
+

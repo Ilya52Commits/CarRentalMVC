@@ -1,24 +1,32 @@
 using CarRentalMVC;
+using CarRentalMVC.Models;
+using CarRentalMVC.Repository;
 using CarRentalMVC.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// получаем строку подключения из файла конфигурации
-string connection = builder.Configuration.GetConnectionString("DefaultConnection");
-
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//var connectionString = builder.Configuration.GetConnectionString("MSSQL");
 
 builder.Services.AddTransient<IMessageSender, EmailMessageSender>();
 
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connection));
+//builder.Services.AddDbContext<ApplicationContext>(options =>
+//    options.UseSqlServer(connectionString));
+
+builder.Services.AddDbContext<ApplicationContext>(options =>
+    options.UseNpgsql(connectionString));
+
+// Регистрация репозитория
+//builder.Services.AddScoped<IRepository<User>, SQLUserRepository>();
+// Для PostgreSQL раскомментируйте следующую строку и закомментируйте предыдущую:
+ builder.Services.AddScoped<IRepository<User>, PostgreSqlUserRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
