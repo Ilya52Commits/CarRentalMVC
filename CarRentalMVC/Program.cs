@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //var connectionString = builder.Configuration.GetConnectionString("MSSQL");
 
-builder.Services.AddTransient<IMessageSender, EmailMessageSender>();
+builder.Services.AddTransient<IRegistrationService, RegistrationService>();
 
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 //builder.Services.AddDbContext<ApplicationContext>(options =>

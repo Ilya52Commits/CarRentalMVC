@@ -1,5 +1,4 @@
 using CarRentalMVC.Models;
-using CarRentalMVC.Repository;
 using CarRentalMVC.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,9 +7,9 @@ namespace CarRentalMVC.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly IMessageSender _message; 
+    private readonly IRegistrationService _message; 
 
-    public HomeController(ILogger<HomeController> logger, IMessageSender message)
+    public HomeController(ILogger<HomeController> logger, IRegistrationService message)
     {
         _logger = logger;
 
@@ -26,15 +25,6 @@ public class HomeController : Controller
     {
         return View();
     }
-
-    //[HttpPost]
-    //public IActionResult PrivateOffice()
-    //{
-    //    //return Json(_message.Send());
-    //    //_dbContext.Create(user);
-    //    //_dbContext.Save();
-    //    return RedirectToAction("Index");
-    //}
 
     public IActionResult Reservation()
     {

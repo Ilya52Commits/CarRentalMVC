@@ -10,6 +10,3 @@ public interface IRepository<T> : IDisposable
     void Delete(T item);            // удаление объекта по id
     void Save();                    // сохранение изменений
 }
-/*
- 1. Создать адстрактный класс с данным функционалом; 
- */
