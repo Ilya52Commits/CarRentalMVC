@@ -1,7 +1,6 @@
 using CarRentalMVC;
 using CarRentalMVC.Repository;
 using CarRentalMVC.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,12 +22,6 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 // Для PostgreSQL раскомментируйте следующую строку и закомментируйте предыдущую:
 builder.Services.AddScoped<UserRepository>();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
-{
-    options.LoginPath = new PathString("/Account/Login");
-});
-builder.Services.AddControllersWithViews();
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -49,8 +42,23 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    _ = endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}",
+        defaults: new { controller = "Home", action = "Index" }
+    );
+    _ = endpoints.MapControllerRoute(
+        name: "Sing-up",
+        pattern: "{controller=RegistrationAuthorization}/{action=RegistrationMethod}/{id?}",
+        defaults: new { controller = "RegistrationAuthorization", action = "RegistrationMethod" }
+    );
+    _ = endpoints.MapControllerRoute(
+        name: "Sing-in",
+        pattern: "{controller=RegistrationAuthorization}/{action=AuthorizationMethod}/{id?}",
+        defaults: new { controller = "RegistrationAuthorization", action = "AuthorizationMethod" }
+    );
+});
 
 app.Run();

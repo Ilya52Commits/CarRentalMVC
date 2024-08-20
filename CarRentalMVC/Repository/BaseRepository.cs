@@ -1,22 +1,13 @@
-﻿namespace CarRentalMVC.Repository;
-using Microsoft.EntityFrameworkCore;
+﻿
+namespace CarRentalMVC.Repository;
 
 public abstract class BaseRepository<T> : IRepository<T> where T : class
 {
     private ApplicationContext _dbContext;
 
-    public BaseRepository()
+    public BaseRepository(ApplicationContext context)
     {
-        // Не знаю, правильно ли это
-        var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CarRentalDb;Username=postgres;Password=52");
-
-        _dbContext = new ApplicationContext(optionsBuilder.Options);
-    }
-
-    public void Create(T item) // Add 
-    {
-        _dbContext.Set<T>().Add(item);
+        _dbContext = context;
     }
 
     public void Delete(T item)
@@ -63,4 +54,40 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
         Dispose(true);
         GC.SuppressFinalize(this);
     }
+
+    public Task<IEnumerable<T>> GetAllObjects()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<T> GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task Create(T item)
+    {
+       await _dbContext.Set<T>().AddAsync(item);
+    }
+
+    Task IRepository<T>.Update(T item)
+    {
+        throw new NotImplementedException();
+    }
+
+    //public async Task Delete(T item)
+    //{
+    //   // await _dbContext.Set<T>().Async(item);
+    //}
+
+    Task IRepository<T>.Save()
+    {
+        throw new NotImplementedException();
+    }
 }
+// Удалить : 
+// Npgsql; 
+// Npgsql.EntityFrameworkCore...; 
+// Microsoft.EFCore.SqlServer; 
+// Переустановить пакеты: 
+// Microsoft.EFCore / Tools

@@ -3,10 +3,10 @@
 public interface IRepository<T> : IDisposable
         where T : class
 {
-    IEnumerable<T> GetUserList();   // получение всех объектов
-    T GetUser(T item);              // получение одного объекта по id
-    void Create(T item);            // создание объекта
-    void Update(T item);            // обновление объекта
-    void Delete(T item);            // удаление объекта по id
-    void Save();                    // сохранение изменений
+    Task<IEnumerable<T>> GetAllObjects();   // получение всех объектов
+    Task<T> GetById(int id);              // получение одного объекта по id
+    Task Create(T item);            // создание объекта
+    Task Update(T item);            // обновление объекта
+    Task Delete(T item);            // удаление объекта по id
+    Task Save();                    // сохранение изменений
 }

@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarRentalMVC.Controllers;
 
-[ApiController]
-[Route("/{controller=api}/{action=RegistrationAuthorization}")]
 public class RegistrationAuthorizationController : BaseController
 {
     private readonly IRegistrationAuthorizationService _dbContext;
@@ -15,16 +13,15 @@ public class RegistrationAuthorizationController : BaseController
         _dbContext = registrationService;
     }
 
-    [HttpGet("{id}")]
-    public ActionResult<UserModel> AuthorizationMethod(UserModel user)
+    public ActionResult<UserModel> Authorization(UserModel user)
     {
-        return _dbContext.AuthorizationMethod(user);
+        return _dbContext.Authorization(user);
     }
 
     [HttpPost]
-    public void RegistrationMethod(UserModel user) 
+    public void Registration(UserModel user) 
     {
-        _dbContext.RegistrationMethod(user);
+        _dbContext.Registration(user);
     }
 }
 

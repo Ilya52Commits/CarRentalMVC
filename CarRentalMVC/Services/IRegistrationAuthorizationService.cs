@@ -1,13 +1,10 @@
 ﻿using CarRentalMVC.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CarRentalMVC.Services;
 
 public interface IRegistrationAuthorizationService
 {
-    ActionResult<UserModel> AuthorizationMethod(UserModel user);
+    public UserModel Authorization(UserModel user);
 
-    void RegistrationMethod(UserModel user);
+    public void Registration(UserModel user);
 }
-
-    
