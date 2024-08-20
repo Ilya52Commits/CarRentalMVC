@@ -1,5 +1,4 @@
 using CarRentalMVC;
-using CarRentalMVC.Models;
 using CarRentalMVC.Repository;
 using CarRentalMVC.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +20,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 // Регистрация репозитория
 //builder.Services.AddScoped<IRepository<User>, SQLUserRepository>();
 // Для PostgreSQL раскомментируйте следующую строку и закомментируйте предыдущую:
- builder.Services.AddScoped<IRepository<User>, PostgreSqlUserRepository>();
+builder.Services.AddScoped<UserRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

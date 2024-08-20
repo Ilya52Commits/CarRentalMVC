@@ -1,10 +1,9 @@
 ﻿using CarRentalMVC.Repository;
 using CarRentalMVC.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CarRentalMVC.Services;
-
-public class RegistrationService
+ 
+public class RegistrationService : IRegistrationService
 {
     private UserRepository _dbContext;
 
@@ -13,11 +12,16 @@ public class RegistrationService
         _dbContext = dbContext;
     }
 
-    [HttpPost]
-    public void PrivateOffice(UserModel user)
+    public void AddNewUser(UserModel user)
     {
         _dbContext.Create(user);
         _dbContext.Save();
+    }
+
+    protected void Dispose(bool disposing)
+    {
+        _dbContext.Dispose();
+        Dispose(disposing);
     }
 }
 

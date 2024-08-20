@@ -1,8 +1,10 @@
-﻿namespace CarRentalMVC.Services;
+﻿using CarRentalMVC.Models;
+
+namespace CarRentalMVC.Services;
 
 public interface IRegistrationService
 {
-    string Name { get; set; } 
+    void AddNewUser(UserModel user);
 }
 
     

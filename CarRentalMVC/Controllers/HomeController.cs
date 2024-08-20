@@ -7,13 +7,13 @@ namespace CarRentalMVC.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly IRegistrationService _message; 
+    private readonly IRegistrationService _registrationService;
 
-    public HomeController(ILogger<HomeController> logger, IRegistrationService message)
+    public HomeController(ILogger<HomeController> logger, IRegistrationService registrationService)
     {
         _logger = logger;
 
-        _message = message; 
+        _registrationService = registrationService;
     }
 
     public IActionResult Index()
@@ -25,6 +25,20 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    [HttpPost]
+    public IActionResult PrivateOffice(UserModel user)
+    {
+        _registrationService.AddNewUser(user);
+        return PrivateOffice();
+    }
+
+    /*
+1.  Реализовать авторизацию
+2. Реализовать передачу строки подключения в RegistrationService; 
+3. Реализовать передачу данных после регистрации и авторизации
+ */
+
 
     public IActionResult Reservation()
     {
