@@ -1,18 +1,24 @@
 ﻿using CarRentalMVC.Repository;
 using CarRentalMVC.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarRentalMVC.Services;
  
-public class RegistrationService : IRegistrationService
+public class RegistrationAuthorizationService : IRegistrationAuthorizationService
 {
     private UserRepository _dbContext;
 
-    public RegistrationService(UserRepository dbContext)
+    public RegistrationAuthorizationService(UserRepository dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public void AddNewUser(UserModel user)
+    public ActionResult<UserModel> AuthorizationMethod(UserModel user)
+    {
+        return _dbContext.GetUser(user);
+    }
+
+    public void RegistrationMethod(UserModel user)
     {
         _dbContext.Create(user);
         _dbContext.Save();

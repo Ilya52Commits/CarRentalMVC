@@ -1,6 +1,7 @@
 using CarRentalMVC;
 using CarRentalMVC.Repository;
 using CarRentalMVC.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //var connectionString = builder.Configuration.GetConnectionString("MSSQL");
 
-builder.Services.AddTransient<IRegistrationService, RegistrationService>();
+builder.Services.AddTransient<IRegistrationAuthorizationService, RegistrationAuthorizationService>();
 
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 //builder.Services.AddDbContext<ApplicationContext>(options =>
@@ -21,6 +22,12 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 //builder.Services.AddScoped<IRepository<User>, SQLUserRepository>();
 // Для PostgreSQL раскомментируйте следующую строку и закомментируйте предыдущую:
 builder.Services.AddScoped<UserRepository>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.LoginPath = new PathString("/Account/Login");
+});
+builder.Services.AddControllersWithViews();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

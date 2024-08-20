@@ -1,6 +1,5 @@
 ﻿namespace CarRentalMVC.Repository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 public abstract class BaseRepository<T> : IRepository<T> where T : class
 {
@@ -8,6 +7,7 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
 
     public BaseRepository()
     {
+        // Не знаю, правильно ли это
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
         optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CarRentalDb;Username=postgres;Password=52");
 

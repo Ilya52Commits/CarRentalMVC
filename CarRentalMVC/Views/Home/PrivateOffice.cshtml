@@ -7,7 +7,7 @@
 
 <div id="sign-in">
     <h2>Войти</h2>
-    <form asp-action="PrivateOffice" asp-controller="home" class="col-4">
+    <form asp-action="RegistrationAuthorization" asp-controller="api" class="col-4">
         <div class="mb-4">
             <label asp-for="Name" class="form-label">Имя</label>
             <input type="text" asp-for="Name" class="form-control" />
@@ -27,7 +27,7 @@
 
 <div id="sign-up">
     <h2>Регистрация</h2>
-    <form asp-action="PrivateOffice" asp-controller="home" class="col-4">
+    <form asp-action="RegistrationAuthorization" asp-controller="api" class="col-4">
         <div class="mb-4">
             <label class="form-label" asp-for="Name">Имя</label><br/>
             <input type="text" asp-for="Name" class="form-control" />
