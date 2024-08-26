@@ -10,11 +10,6 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
         _dbContext = context;
     }
 
-    public void Delete(T item)
-    {
-        _dbContext.Set<T>().Remove(item);
-    }
-
     public T GetUser(T item)
     {
         return _dbContext.Set<T>().Find(item);
@@ -28,11 +23,6 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
     public void Save()
     {
         _dbContext.SaveChanges();
-    }
-
-    public void Update(T item)
-    {
-        _dbContext.Set<T>().Update(item);
     }
 
     private bool disposed = false;
@@ -55,10 +45,10 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
         GC.SuppressFinalize(this);
     }
 
-    public Task<IEnumerable<T>> GetAllObjects()
-    {
-        throw new NotImplementedException();
-    }
+    //public async Task<IEnumerable<T>> GetAllObjects()
+    //{
+    //    return await _dbContext.Set<T>().FindAsync();
+    //}
 
     public Task<T> GetById(int id)
     {
@@ -67,27 +57,23 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
 
     public async Task Create(T item)
     {
-       await _dbContext.Set<T>().AddAsync(item);
+        await _dbContext.Set<T>().AddAsync(item);
     }
 
-    Task IRepository<T>.Update(T item)
+    public async Task Update(T item)
     {
-        throw new NotImplementedException();
+        _dbContext.Set<T>().Update(item);
+        await _dbContext.SaveChangesAsync();
     }
 
-    //public async Task Delete(T item)
-    //{
-    //   // await _dbContext.Set<T>().Async(item);
-    //}
+    public async Task Delete(T item)
+    {
+        _dbContext.Set<T>().Remove(item);
+        await _dbContext.SaveChangesAsync();
+    }
 
     Task IRepository<T>.Save()
     {
         throw new NotImplementedException();
     }
 }
-// Удалить : 
-// Npgsql; 
-// Npgsql.EntityFrameworkCore...; 
-// Microsoft.EFCore.SqlServer; 
-// Переустановить пакеты: 
-// Microsoft.EFCore / Tools
