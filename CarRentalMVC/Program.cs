@@ -51,13 +51,13 @@ app.UseEndpoints(endpoints =>
     );
     _ = endpoints.MapControllerRoute(
         name: "Sing-up",
-        pattern: "{controller=RegistrationAuthorization}/{action=RegistrationMethod}/{id?}",
-        defaults: new { controller = "RegistrationAuthorization", action = "RegistrationMethod" }
+        pattern: "{controller=RegistrationAuthorization}/{action=Registration}/{id?}",
+        defaults: new { controller = "RegistrationAuthorization", action = "Registration" }
     );
     _ = endpoints.MapControllerRoute(
         name: "Sing-in",
-        pattern: "{controller=RegistrationAuthorization}/{action=AuthorizationMethod}/{id?}",
-        defaults: new { controller = "RegistrationAuthorization", action = "AuthorizationMethod" }
+        pattern: "{controller=RegistrationAuthorization}/{action=Authorization}/{id?}",
+        defaults: new { controller = "RegistrationAuthorization", action = "Authorization" }
     );
 });
 

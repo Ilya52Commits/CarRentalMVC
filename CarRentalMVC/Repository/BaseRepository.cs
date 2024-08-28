@@ -10,19 +10,34 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
         _dbContext = context;
     }
 
-    public T GetUser(T item)
-    {
-        return _dbContext.Set<T>().Find(item);
-    }
-
-    public IEnumerable<T> GetUserList()
+    public IEnumerable<T> GetAllObjects()
     {
         return _dbContext.Set<T>();
     }
 
-    public void Save()
+    public T GetById(int id)
     {
-        _dbContext.SaveChanges();
+        return _dbContext.Set<T>().Find(id);
+    }
+
+    public async Task Create(T item)
+    {
+        await _dbContext.Set<T>().AddAsync(item);
+    }
+
+    public void Update(T item)
+    {
+        _dbContext.Set<T>().Update(item);
+    }
+
+    public void Delete(T item)
+    {
+        _dbContext.Set<T>().Remove(item);
+    }
+
+    public async Task Save()
+    {
+        await _dbContext.SaveChangesAsync();
     }
 
     private bool disposed = false;
@@ -43,37 +58,5 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
     {
         Dispose(true);
         GC.SuppressFinalize(this);
-    }
-
-    //public async Task<IEnumerable<T>> GetAllObjects()
-    //{
-    //    return await _dbContext.Set<T>().FindAsync();
-    //}
-
-    public Task<T> GetById(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task Create(T item)
-    {
-        await _dbContext.Set<T>().AddAsync(item);
-    }
-
-    public async Task Update(T item)
-    {
-        _dbContext.Set<T>().Update(item);
-        await _dbContext.SaveChangesAsync();
-    }
-
-    public async Task Delete(T item)
-    {
-        _dbContext.Set<T>().Remove(item);
-        await _dbContext.SaveChangesAsync();
-    }
-
-    Task IRepository<T>.Save()
-    {
-        throw new NotImplementedException();
     }
 }

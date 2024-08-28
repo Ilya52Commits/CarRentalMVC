@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CarRentalMVC.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240806102530_Initial")]
+    [Migration("20240827155830_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,12 +19,12 @@ namespace CarRentalMVC.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CarRentalMVC.Models.User", b =>
+            modelBuilder.Entity("CarRentalMVC.Models.UserModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

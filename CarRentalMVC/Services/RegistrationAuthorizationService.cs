@@ -2,7 +2,7 @@
 using CarRentalMVC.Models;
 
 namespace CarRentalMVC.Services;
- 
+
 public class RegistrationAuthorizationService : IRegistrationAuthorizationService
 {
     private UserRepository _dbContext;
@@ -14,7 +14,7 @@ public class RegistrationAuthorizationService : IRegistrationAuthorizationServic
 
     public UserModel Authorization(UserModel user)
     {
-        return _dbContext.GetUser(user);
+        return _dbContext.GetById(user.Id);
     }
 
     public void Registration(UserModel user)
