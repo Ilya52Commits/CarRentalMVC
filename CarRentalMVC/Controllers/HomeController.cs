@@ -22,15 +22,8 @@ public class HomeController : Controller
         return View();
     }
 
-    /*
-1.  Реализовать авторизацию
-2. Реализовать передачу строки подключения в RegistrationService; 
-3. Реализовать передачу данных после регистрации и авторизации
- */
-
-
     public IActionResult Reservation()
-    {
+    { 
         return View();
     }
 

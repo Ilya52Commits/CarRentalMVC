@@ -40,3 +40,6 @@ main {
 #sign-in, #sign-up {
     display: none;
 }
+.validation-message {
+    color: red; 
+}

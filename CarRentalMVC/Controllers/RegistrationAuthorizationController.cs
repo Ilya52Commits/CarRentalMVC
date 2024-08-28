@@ -1,11 +1,10 @@
 ﻿using CarRentalMVC.Models;
 using CarRentalMVC.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.WebPages.Html;
 
 namespace CarRentalMVC.Controllers;
 
-public class RegistrationAuthorizationController : BaseController
+public class RegistrationAuthorizationController : Controller
 {
     private readonly IRegistrationAuthorizationService _dbContext;
 
@@ -14,16 +13,24 @@ public class RegistrationAuthorizationController : BaseController
         _dbContext = registrationService;
     }
 
+    [HttpPost]
     public ActionResult<UserModel> Authorization(UserModel user)
     {
-        return _dbContext.Authorization(user);
+        if (ModelState.IsValid)
+        {
+            return _dbContext.Authorization(user);
+        }
+
+        return View(user);
     }
 
     [HttpPost]
-    public void Registration(UserModel user) 
+    public void Registration(UserModel user)
     {
-        //if (ModelState.IsValid) {
-        //_dbContext.Registration(user);
+        if (ModelState.IsValid)
+        {
+            _dbContext.Registration(user);
+        }
     }
 }
 
